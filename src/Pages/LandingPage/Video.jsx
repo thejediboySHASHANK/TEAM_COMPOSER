@@ -1,5 +1,5 @@
 import React from "react";
-import Vid from "./video.mp4"
+import Vid from "./vid.mp4"
 import { useEffect } from "react";
 import { useRef } from "react";
 
@@ -9,7 +9,7 @@ function Video () {
 
     useEffect(() => {
         if (videoRef.current) {
-            videoRef.current.playbackRate = 1;
+            videoRef.current.playbackRate = 0.7;
         }
     }, []);
 
