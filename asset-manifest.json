@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.js": "/static/js/main.08fb79e2.js",
+    "static/media/video.mp4": "/static/media/video.759b564a0139f77e5b2c.mp4",
+    "static/media/lol.mp4": "/static/media/lol.9414962c490b50bd13ec.mp4",
+    "static/media/shake.jpg": "/static/media/shake.2cc0a34b0cd26c0dccef.jpg",
+    "static/media/sign.jpg": "/static/media/sign.87ed7701499c9f0f3e4e.jpg",
+    "static/media/log4.jpg": "/static/media/log4.20db2c02d38f01ad06a0.jpg",
+    "static/media/meow.avif": "/static/media/meow.d7187ae21f1aba4d3136.avif",
+    "index.html": "/index.html",
+    "main.08fb79e2.js.map": "/static/js/main.08fb79e2.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.08fb79e2.js"
+  ]
+}
