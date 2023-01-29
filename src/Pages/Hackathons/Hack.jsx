@@ -2,10 +2,18 @@ import React, { useState } from "react"
 import { useEffect } from "react"
 import global from 'global'
 import { Link } from "react-router-dom"
+import axios from "axios"
+
+// const competitions = [
+//     { id: 1, name: 'Webathon', img: 'https://images.unsplash.com/photo-1519669417670-68775a50919c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80' },
+//     { id: 2, name: 'SWOX S3', img: 'https://images.unsplash.com/photo-1487174244970-cd18784bb4a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80' },
+//     { id: 3, name: 'Bit N Build', img: 'https://images.unsplash.com/photo-1509479200622-4503f27f12ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80' },
+//     { id: 4, name: 'Crysis', img: 'https://images.unsplash.com/photo-1485796826113-174aa68fd81b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' }
+// ];
 
 const Hack = () => {
 
-    // const [value, setValue] = useState ("");
+    const [competitions, setCompetitions] = useState([]);
 
     global.batchID = "YO";
 
@@ -73,14 +81,29 @@ const Hack = () => {
         window.ontouchend = e => handleOnUp(e.touches[0]);
         window.onmousemove = e => handleOnMove(e);
         window.ontouchmove = e => handleOnMove(e.touches[0]);
-        // window.onscroll = e => handleOnMove(e.touches[0]);
 
-        // function Batch(value) {
+        const fetchCompetitions = async (e) => {
 
-        //     let amount = value;
-        //     console.log(amount);
+            try {
+                await axios.get('https://django-instance-627.azurewebsites.net/list_competitions_service')
 
-        // }
+                .then(res => {
+                    const data = res.json ();
+                    console.log (data);
+                    setCompetitions (data);
+
+                });
+
+            } catch (error) {
+
+            }
+            // const res = await fetch ('https://django-instance-627.azurewebsites.net/list_competitions_service');
+            // const data = await res.json();
+            // console.log (data);
+            // setCompetitions(data);
+        };
+
+        fetchCompetitions ();
 
     }, []);
 
@@ -88,38 +111,17 @@ const Hack = () => {
 
 
     return (
-        <div>
-            <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
-                <img class="image" src="https://images.unsplash.com/photo-1519669417670-68775a50919c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" draggable="false" />
-                <p className="six_seven">Webathon</p>
-                <p className="early">BUILD AWESOME WEB-APPS</p>
+        <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
 
-                <Link to="/choose"><button id="one" onClick={handleClick} className="sixbutton">SELECT</button></Link>
-
-                <img class="image" src="https://images.unsplash.com/photo-1487174244970-cd18784bb4a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" draggable="false" />
-                <p className="seven_eight">SWOX S3</p>
-                <p className="morning">CONTRIBUTE IN OPEN SOURCE</p>
-                <Link to="/choose"><button id="two" onClick={handleClick2} className="sevenbutton" type="submit" name="submit">SELECT</button></Link>
-
-                <img class="image" src="https://images.unsplash.com/photo-1509479200622-4503f27f12ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" draggable="false" />
-                <p className="eight_nine">Bit N Build</p>
-                <p className="late_morning">Blockchain Mania</p>
-                <Link to="/choose"><button id="three" onClick={handleClick3} className="eightbutton" type="submit" name="submit">SELECT</button></Link>
-
-                <img class="image" src="https://images.unsplash.com/photo-1485796826113-174aa68fd81b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" draggable="false" />
-                <p className="nine">Crysis</p>
-                <p className="night">Build ML projects</p>
-                <Link to="/choose"><button id="four" onClick={handleClick4} className="ninebutton" type="submit" name="submit">SELECT</button></Link>
-
-
-                {/* <img class="image" src="https://images.unsplash.com/photo-1548021682-1720ed403a5b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" draggable="false" />
-                <img class="image" src="https://images.unsplash.com/photo-1496753480864-3e588e0269b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2134&q=80" draggable="false" />
-                <img class="image" src="https://images.unsplash.com/photo-1613346945084-35cccc812dd5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1759&q=80" draggable="false" />
-                <img class="image" src="https://images.unsplash.com/photo-1516681100942-77d8e7f9dd97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" draggable="false" /> */}
-            </div>
+            {competitions.map(event => (
+                <div>
+                    <img class="image" src={event.img} draggable="false" />
+                    <p className="six_seven">{event.name}</p>
+                    <Link to="/choose"><button id={event.id} className="sixbutton" type="submit" name="submit" onClick={handleClick}>SELECT</button></Link>
+                </div>
+            ))}
         </div>
     )
 }
 
-// console.log (handleOnMove())
-export default Hack ;
+export default Hack;
