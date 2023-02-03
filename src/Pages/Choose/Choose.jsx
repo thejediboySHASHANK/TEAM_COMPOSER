@@ -2,14 +2,15 @@ import React from "react";
 import Image from "./shake.jpg"
 import { Link } from "react-router-dom";
 
-function Choose() {
+function Choose(props) {
+    const { teams } = props;
     return (
         <div className="row">
             <div className="col-lg-6 md-6 sm-12">
                 <Link to="/teamlist"><div class="container">
                     <div class="card xyz card1">
                         <div class="border">
-                            <h2>Join Teams</h2> 
+                            <h2>Join Team</h2> 
                         </div>
                     </div>
                 </div></Link>

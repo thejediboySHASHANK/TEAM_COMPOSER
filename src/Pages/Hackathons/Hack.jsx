@@ -3,6 +3,16 @@ import { useEffect } from "react"
 import global from 'global'
 import { Link } from "react-router-dom"
 import axios from "axios"
+import swal from "sweetalert"
+import { useNavigate } from "react-router-dom"
+
+const images = [
+    'https://images.unsplash.com/photo-1519669417670-68775a50919c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
+    'https://images.unsplash.com/photo-1487174244970-cd18784bb4a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80',
+    'https://images.unsplash.com/photo-1509479200622-4503f27f12ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',
+    'https://images.unsplash.com/photo-1485796826113-174aa68fd81b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    'https://c4.wallpaperflare.com/wallpaper/364/854/488/digital-art-photoshop-concept-art-futuristic-wallpaper-preview.jpg'
+]
 
 // const competitions = [
 //     { id: 1, name: 'Webathon', img: 'https://images.unsplash.com/photo-1519669417670-68775a50919c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80' },
@@ -13,33 +23,29 @@ import axios from "axios"
 
 const Hack = () => {
 
+    const navigate = useNavigate ();
+
+    const randomImage = () => {
+        return images[Math.floor(Math.random() * images.length)];
+    };
+    function getMarginLeft(counter) {
+        return `${counter * 45}rem`;
+    }
+
+
     const [competitions, setCompetitions] = useState([]);
+    // const [teams, setTeams] = useState([]);
 
     global.batchID = "YO";
 
-    const handleClick = () => {
+    const handleClick = (teams) => {
         // setValue ("yoooo");
-        global.batchID = "Webathon";
-        global.id = "84684b99-e89b-43db-b0c0-180de89adf4a"
-        window.alert("Hackathon is : " + global.batchID)
-    }
-    const handleClick2 = () => {
-        // setValue ("yoooo2");
-        global.batchID = "SWOX S3";
-        window.alert("Hackathon is : " + global.batchID)
-        global.id = "8ca2043d-b4c1-459b-91a5-708f0617b87e"
-    }
-    const handleClick3 = () => {
-        // setValue ("yoooo3");
-        global.batchID = "Bit N Build";
-        window.alert("Hackathon is : " + global.batchID)
-        global.id = "da353f60-4b19-4ae9-ac28-4d60796f1e37"
-    }
-    const handleClick4 = () => {
-        // setValue ("yoooo4");
-        global.batchID = "Crysis";
-        window.alert("Hackathon is : " + global.batchID)
-        global.id = "2b3c3843-225a-450d-b4a5-c7374851b2ad"
+        // global.batchID = "Webathon";
+        // global.id = "84684b99-e89b-43db-b0c0-180de89adf4a"
+        // window.alert("Hackathon is : " + global.batchID)
+        // setTeams (competitions.teams)
+        // console.log (teams);
+        navigate("/choose", { state: { teams } });
     }
 
     useEffect(() => {
@@ -82,29 +88,19 @@ const Hack = () => {
         window.onmousemove = e => handleOnMove(e);
         window.ontouchmove = e => handleOnMove(e.touches[0]);
 
+    }, []);
+
+    useEffect(() => {
+
         const fetchCompetitions = async (e) => {
-
-            try {
-                await axios.get('https://django-instance-627.azurewebsites.net/list_competitions_service')
-
-                .then(res => {
-                    const data = res.json ();
-                    console.log (data);
-                    setCompetitions (data);
-
-                });
-
-            } catch (error) {
-
-            }
-            // const res = await fetch ('https://django-instance-627.azurewebsites.net/list_competitions_service');
-            // const data = await res.json();
-            // console.log (data);
-            // setCompetitions(data);
+            const response = await fetch(`https://django-instance-627.azurewebsites.net/api/list_competitions_service/`)
+                .then(res => res.json())
+            console.log(response.data)
+            setCompetitions(response.data)
+            console.log([competitions])
         };
 
-        fetchCompetitions ();
-
+        fetchCompetitions();
     }, []);
 
 
@@ -113,11 +109,24 @@ const Hack = () => {
     return (
         <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
 
-            {competitions.map(event => (
+            {/* <img class="image" src="https://images.unsplash.com/photo-1519669417670-68775a50919c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" draggable="false" />
+            <p className="six_seven">Webathon</p>
+            <Link to="/choose"><button className="sixbutton" type="submit" name="submit" onClick={handleClick}>SELECT</button></Link>
+
+            <img class="image" src="https://images.unsplash.com/photo-1519669417670-68775a50919c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" draggable="false" />
+            <p className="six_seven">Webathon</p>
+            <Link to="/choose"><button className="sixbutton" type="submit" name="submit" onClick={handleClick}>SELECT</button></Link>
+
+            <img class="image" src="https://images.unsplash.com/photo-1519669417670-68775a50919c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" draggable="false" />
+            <p className="six_seven">Webathon</p>
+            <Link to="/choose"><button className="sixbutton" type="submit" name="submit" onClick={handleClick}>SELECT</button></Link> */}
+
+            {competitions.map((event, index) => (
                 <div>
-                    <img class="image" src={event.img} draggable="false" />
-                    <p className="six_seven">{event.name}</p>
-                    <Link to="/choose"><button id={event.id} className="sixbutton" type="submit" name="submit" onClick={handleClick}>SELECT</button></Link>
+                    <img class="image" src={randomImage()} draggable="false" />
+                    <p style={{ marginLeft: getMarginLeft(index) }} className="six_seven">{event.name}</p>
+                    <p style={{ marginLeft: getMarginLeft(index), bottom: '8rem'}}  className="six_seven">Venue : {event.venue}</p>
+                    <Link to="/choose"><button style={{ marginLeft: getMarginLeft(index) }} id={event.id} className="sixbutton" type="submit" name="submit" onClick={handleClick}>SELECT</button></Link>
                 </div>
             ))}
         </div>

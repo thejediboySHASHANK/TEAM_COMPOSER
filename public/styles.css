@@ -316,11 +316,18 @@ body {
 .six_seven {
     font-family: 'Roboto', sans-serif;
     font-size: 1.5rem;
-    position: absolute;
+    /* position: absolute;
     color: white;
     top: 75vh;
-    left: 4rem;
+    left: 4rem; */
     display: inline-block;
+    color: white;
+    position: absolute;
+    bottom: 190px;
+    left: 60px;
+    z-index: 1;
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    padding: 10px;
 
 
 }
@@ -563,18 +570,30 @@ body {
 }
 .form-control {
     font-size: 1.2rem;
+    background-color: transparent;
+    border: white 20px;
+    box-shadow: 10px 15px 10px -15px #fff; 
+
     /* text-align: center; */
     /* justify-content: center;  */
 }
 .form-group input {
-    background-color: #212020;
+    /* background-color: #212020; */
     background: transparent;
     color: aliceblue;
+    border: none;
     width: 75%;
     border-radius: 15px;
     /* text-align: center; */
 
 }
+.form-control input :focus {
+    outline: none;      /* Remove default outline and use border or box-shadow */
+    box-shadow: 0 0 0 2px orange;
+
+}
+
+
 /* .form-text { */
     /* color: aliceblue !important; */
     /* margin-top: 0.5rem; */
@@ -757,4 +776,10 @@ body {
     padding-bottom: 3rem;
     padding-top: 1rem;
     /* text-align: center; */
+}
+
+.divsign {
+    /* margin-bottom: 10rem; */
+    margin-top: 1vw;
+    /* width: 40%; */
 }
